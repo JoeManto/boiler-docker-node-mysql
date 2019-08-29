@@ -1,0 +1,27 @@
+#--build and run
+#docker-compose up -d
+
+#--connectiondoc
+#mysql -h 127.0.0.1 -u root -P 3306 -p rootpw
+
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - "./.mysql-data/db:/var/lib/mysql"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - ${MYSQL_PORT}:3306
+  app:
+    environment:
+      - NODE_ENV=dev
+    ports:
+      - "7304:7304"
+    build:
+      context: .
+    command: ["bash", "./dbwait-script.sh"]
