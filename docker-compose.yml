@@ -1,8 +1,11 @@
 #--build and run
-#docker-compose up -d
+#docker-compose up --build
 
-#--connectiondoc
-#mysql -h 127.0.0.1 -u root -P 3306 -p rootpw
+#--connection via node container
+#mysql -h <DATABASE_SEVERICE_NAME> -u <DATA_BASE_USER> -P <EXPOSED PORT> -p <ROOT_PASS>
+
+#--connection via host
+#mysql -h 127.0.0.1 -u <DATA_BASE_USER> -P <EXPOSED PORT> -p <ROOT_PASS>
 
 version: '3'
 services:
@@ -24,4 +27,5 @@ services:
       - "7304:7304"
     build:
       context: .
+    #calling the mysql health script and then starting the express server
     command: ["bash", "./dbwait-script.sh"]

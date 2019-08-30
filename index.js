@@ -1,8 +1,11 @@
 const mysql = require('mysql');
 const express = require('express');
+
+//require dotenv module for reading environment values
 const dotenv = require('dotenv');
 dotenv.config()
 
+//config mysql connection
 const db = mysql.createConnection({
     host: process.env.MYSQL_CONTAINER_NAME,
     port: process.env.MYSQL_PORT,
@@ -10,11 +13,11 @@ const db = mysql.createConnection({
     password: process.env.MYSQL_ROOT_PASSWORD,
 });
 
+//attempt a mysql connection over tcp
 db.connect(function(err){
     if (err) {
-      console.log(err)
-        console.log('connection failed waiting');
-        return;
+      console.log(err);
+      return;
     }
     console.log('mysql connected...');
 });
