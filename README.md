@@ -5,6 +5,11 @@ Basic boilerplate for creating a connection from a Node container to a MySql Con
 
 Opening a success TCP connection from a Node container to a MySQL container can be very frustrating if you are not experienced with docker networks or understand how they configure your containers to begin communications between each other.
 
+Run with
+```bash
+docker-compose up --build
+```
+
 **Some Important Notes For Understanding**
 - Docker Containers by default are completely isolated and have no idea of other Containers running via Docker.
 - Docker Compose versions like *'3'* automatically define a default network and add it to each one of your services.
